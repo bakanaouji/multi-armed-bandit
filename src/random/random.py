@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def standard_gamma(shape):
+def standard_gamma(shape, scale=1.0):
     # calc n
     if shape <= 0.4:
         n = 1.0 / shape
@@ -29,4 +29,8 @@ def standard_gamma(shape):
         y = n * (b1 * w2 - b2 * w1)
         if y >= 0 and np.math.log(y) >= n * (w2 - w1):
             break
-    return np.math.exp(n * (w2 - w1))
+    return np.math.exp(n * (w2 - w1)) * scale
+
+
+def chisquare(df):
+    return standard_gamma(df / 2.0, 2.0)
