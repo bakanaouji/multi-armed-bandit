@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import os
 import pandas as pd
 
 from arm.arm import NormalDistributionArm
@@ -42,10 +43,15 @@ def main():
     plt.xscale('log')
     plt.show()
 
+    # save log
+    save_path = '../data/' + arms[0].__class__.__name__\
+                + "/" + algorithm.__class__.__name__
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
     regrets = pd.DataFrame(regrets)
     thetas = pd.DataFrame(thetas)
-    regrets.to_csv('../data/regret.csv')
-    thetas.to_csv('../data/theta.csv')
+    regrets.to_csv(save_path + '/regret.csv')
+    thetas.to_csv(save_path + '/theta.csv')
 
 
 if __name__ == '__main__':
