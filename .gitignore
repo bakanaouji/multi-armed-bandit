@@ -38,3 +38,8 @@ bin
 *.log
 *.swp
 *.bak
+*.csv
+
+# python
+__pycache__
+*.pyc
