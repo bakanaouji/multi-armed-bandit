@@ -1,32 +1,32 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 
+from arm.arm import NormalDistributionArm
+from bandit_algorithm.thompson_sampling.gaussian_prior import ThompsonSamplingGaussianPrior
 from utils.random import *
 
 
 def main():
-    arms = [{"mean": 1.0, "sigma": 3.0}, {"mean": 0.0, "sigma": 0.3}]
+    arms = [NormalDistributionArm(1.0, 3.0), NormalDistributionArm(0.0, 0.3)]
     N = len(arms)
-    k = np.zeros(N)
-    mu = np.zeros(N)
+    algorithm = ThompsonSamplingGaussianPrior(N)
+
     regret = 0.0
     regrets = []
     thetas = []
+
+    # main loop
     for t in range(20000):
-        # For each arm i=1,...,N, sample random value from normal distribution
-        theta = [np.random.normal(mu[i], 1.0 / (k[i] + 1.0)) for i in range(N)]
+        # estimate mean of each arm
+        theta = algorithm.estimate_mean()
         # select arm
         arm_index = np.argmax(theta)
         # play arm and observe reward
-        reward = np.random.normal(arms[arm_index]["mean"],
-                                  arms[arm_index]["sigma"])
-        # update parameter of normal distribution
-        mu[arm_index] = (mu[arm_index] * (k[arm_index] + 1.0) + reward) /\
-                        (k[arm_index] + 2.0)
-        k[arm_index] += 1
+        reward = arms[arm_index].play()
+        # update parameter of bandit algorithm
+        algorithm.update_param(arm_index, reward)
         # update regret
-        regret += arms[0]["mean"] - arms[arm_index]["mean"]
+        regret += arms[0].mean - arms[arm_index].mean
         # stock log
         regrets.append(regret)
         thetas.append([theta[i] for i in range(N)])
