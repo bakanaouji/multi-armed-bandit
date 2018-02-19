@@ -32,12 +32,12 @@ def gamma(shape, scale=1.0):
     return np.math.exp(n * (w2 - w1)) * scale
 
 
-def chi_squared(df):
-    return gamma(df / 2.0, 2.0)
-
-
 def inverse_gamma(shape, scale):
     return 1.0 / gamma(shape, 1.0 / scale)
+
+
+def chi_squared(df):
+    return gamma(df / 2.0, 2.0)
 
 
 def scaled_inverse_chi_squared(df, scale):
