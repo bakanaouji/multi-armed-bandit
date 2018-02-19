@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def standard_gamma(shape, scale=1.0):
+def gamma(shape, scale=1.0):
     # calc n
     if shape <= 0.4:
         n = 1.0 / shape
@@ -32,5 +32,13 @@ def standard_gamma(shape, scale=1.0):
     return np.math.exp(n * (w2 - w1)) * scale
 
 
-def chisquare(df):
-    return standard_gamma(df / 2.0, 2.0)
+def chi_squared(df):
+    return gamma(df / 2.0, 2.0)
+
+
+def inverse_gamma(shape, scale):
+    return 1.0 / gamma(shape, 1.0 / scale)
+
+
+def scaled_inverse_chi_squared(df, scale):
+    return inverse_gamma(df / 2.0, df * scale / 2.0)
