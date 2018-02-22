@@ -6,9 +6,11 @@ from utils.random import *
 
 
 class BanditCore(object):
-    def __init__(self, arms, algorithm):
+    def __init__(self, arms, algorithm, args, save_path):
         self.arms = arms
         self.algorithm = algorithm
+        self.show_log = args.show_log
+        self.save_path = save_path
 
     def experiment(self):
         N = len(self.arms)
@@ -33,23 +35,22 @@ class BanditCore(object):
             regrets.append(regret)
             thetas.append([theta[i] for i in range(N)])
             # output
-            if t % 500 == 0:
+            if t % 1000 == 0:
                 s = "iteration: " + str(t) + ", regret: " + str(regret) + ", "
                 for i in range(N):
                     s += "est_mean: " + str(theta[i]) + ", "
                 print(s)
 
         # plot log
-        plt.plot(regrets)
-        plt.xscale('log')
-        plt.show()
+        if self.show_log:
+            plt.plot(regrets)
+            plt.xscale('log')
+            plt.show()
 
         # save log
-        save_path = '../data/' + self.arms[0].__class__.__name__ \
-                    + "/" + self.algorithm.__class__.__name__
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
+        if not os.path.exists(self.save_path):
+            os.makedirs(self.save_path)
         regrets = pd.DataFrame(regrets)
         thetas = pd.DataFrame(thetas)
-        regrets.to_csv(save_path + '/regret.csv')
-        thetas.to_csv(save_path + '/theta.csv')
+        regrets.to_csv(self.save_path + '/regret.csv')
+        thetas.to_csv(self.save_path + '/theta.csv')
