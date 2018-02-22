@@ -39,6 +39,7 @@ bin
 *.swp
 *.bak
 *.csv
+*.pdf
 
 # python
 __pycache__

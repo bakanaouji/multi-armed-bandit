@@ -6,13 +6,14 @@ from utils.random import *
 
 
 class BanditCore(object):
-    def __init__(self, arms, algorithm, args, save_path):
+    def __init__(self, arms, algorithm, args):
         self.arms = arms
         self.algorithm = algorithm
         self.show_log = args.show_log
-        self.save_path = save_path
 
-    def experiment(self):
+    def experiment(self, save_path):
+        self.algorithm.initialize()
+
         N = len(self.arms)
 
         regret = 0.0
@@ -20,7 +21,9 @@ class BanditCore(object):
         thetas = []
 
         # main loop
-        for t in range(20000):
+        loop_num = 20000
+        t = 0
+        while True:
             # estimate mean of each arm
             theta = self.algorithm.estimate_mean()
             # select arm
@@ -35,22 +38,28 @@ class BanditCore(object):
             regrets.append(regret)
             thetas.append([theta[i] for i in range(N)])
             # output
-            if t % 1000 == 0:
-                s = "iteration: " + str(t) + ", regret: " + str(regret) + ", "
+            if t % 5000 == 0:
+                s = 'iteration: ' + str(t) + ', regret: ' + str(regret) + ', '
                 for i in range(N):
-                    s += "est_mean: " + str(theta[i]) + ", "
+                    s += 'est_mean: ' + str(theta[i]) + ', '
                 print(s)
+            t += 1
+            if t > loop_num:
+                break
 
         # plot log
         if self.show_log:
             plt.plot(regrets)
+            plt.grid()
             plt.xscale('log')
+            plt.xlim(0, loop_num)
+            plt.ylim(0, 100)
             plt.show()
 
         # save log
-        if not os.path.exists(self.save_path):
-            os.makedirs(self.save_path)
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
         regrets = pd.DataFrame(regrets)
         thetas = pd.DataFrame(thetas)
-        regrets.to_csv(self.save_path + '/regret.csv')
-        thetas.to_csv(self.save_path + '/theta.csv')
+        regrets.to_csv(save_path + '/regret.csv')
+        thetas.to_csv(save_path + '/theta.csv')
