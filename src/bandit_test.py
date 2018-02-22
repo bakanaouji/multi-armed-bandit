@@ -3,7 +3,8 @@ import os
 import pandas as pd
 
 from arm.arm import NormalDistributionArm
-from bandit_algorithm.thompson_sampling.gaussian_prior import ThompsonSamplingGaussianPrior
+from bandit_algorithm.thompson_sampling.gaussian_prior import \
+    ThompsonSamplingGaussianPrior
 from utils.random import *
 
 
@@ -44,7 +45,7 @@ def main():
     plt.show()
 
     # save log
-    save_path = '../data/' + arms[0].__class__.__name__\
+    save_path = '../data/' + arms[0].__class__.__name__ \
                 + "/" + algorithm.__class__.__name__
     if not os.path.exists(save_path):
         os.makedirs(save_path)
