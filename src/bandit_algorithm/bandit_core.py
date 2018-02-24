@@ -9,6 +9,7 @@ class BanditCore(object):
     def __init__(self, arms, algorithm, args):
         self.arms = arms
         self.algorithm = algorithm
+        self.save_log = args.save_log
         self.show_log = args.show_log
 
     def experiment(self, save_path):
@@ -57,9 +58,10 @@ class BanditCore(object):
             plt.show()
 
         # save log
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
-        regrets = pd.DataFrame(regrets)
-        thetas = pd.DataFrame(thetas)
-        regrets.to_csv(save_path + '/regret.csv')
-        thetas.to_csv(save_path + '/theta.csv')
+        if self.save_log:
+            if not os.path.exists(save_path):
+                os.makedirs(save_path)
+            regrets = pd.DataFrame(regrets)
+            thetas = pd.DataFrame(thetas)
+            regrets.to_csv(save_path + '/regret.csv')
+            thetas.to_csv(save_path + '/theta.csv')

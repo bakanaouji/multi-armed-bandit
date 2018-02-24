@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 
-def calc_mean_log(save_path, file_name):
+def calc_mean_log(save_path, file_name, ylim):
     files = os.listdir(save_path)
     files = [file for file in files if file[:3] == 'Exp']
     N = len(files)
@@ -21,6 +21,6 @@ def calc_mean_log(save_path, file_name):
     plt.grid()
     plt.xscale('log')
     plt.xlim(0, len(mean.index))
-    plt.ylim(0, 100)
+    plt.ylim(0, ylim)
     plt.savefig(save_path + '/mean_' + file_name + '.pdf')
     plt.close()
