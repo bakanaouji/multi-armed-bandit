@@ -4,6 +4,8 @@ from arm.arm import NormalDistributionArm
 from bandit_algorithm.bandit_core import BanditCore
 from bandit_algorithm.thompson_sampling.gaussian_prior import \
     ThompsonSamplingGaussianPrior
+from bandit_algorithm.thompson_sampling.gaussian_sicq_prior import \
+    ThompsonSamplingGaussianSicqPrior
 from utils.data_processing import calc_mean_log
 
 
@@ -24,7 +26,8 @@ def main():
             NormalDistributionArm(0.0, 0.3)]
 
     # define bandit algorithm
-    algorithm = ThompsonSamplingGaussianPrior(len(arms))
+    # algorithm = ThompsonSamplingGaussianPrior(len(arms))
+    algorithm = ThompsonSamplingGaussianSicqPrior(len(arms))
     save_path_root = '../data/' + arms[0].__class__.__name__ \
                      + '/' + algorithm.__class__.__name__
     core = BanditCore(arms, algorithm, args)

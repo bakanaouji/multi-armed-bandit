@@ -13,7 +13,8 @@ class ThompsonSamplingGaussianPrior(object):
 
     def estimate_mean(self):
         # For each arm i=1,...,N, sample random value from normal distribution
-        theta = [np.random.normal(self.mu[i], 1.0 / (self.k[i] + 1.0))
+        theta = [np.random.normal(self.mu[i],
+                                  np.math.sqrt(1.0 / (self.k[i] + 1.0)))
                  for i in range(self.N)]
         # print(self.mu, self.k, theta)
         return theta
