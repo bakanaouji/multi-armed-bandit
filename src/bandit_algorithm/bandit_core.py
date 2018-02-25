@@ -19,7 +19,6 @@ class BanditCore(object):
 
         regret = 0.0
         regrets = []
-        thetas = []
 
         # main loop
         loop_num = 20000
@@ -37,7 +36,6 @@ class BanditCore(object):
             regret += self.arms[0].mean - self.arms[arm_index].mean
             # stock log
             regrets.append(regret)
-            thetas.append([theta[i] for i in range(N)])
             # output
             if t % 5000 == 0:
                 s = 'iteration: ' + str(t) + ', regret: ' + str(regret) + ', '
@@ -62,6 +60,5 @@ class BanditCore(object):
             if not os.path.exists(save_path):
                 os.makedirs(save_path)
             regrets = pd.DataFrame(regrets)
-            thetas = pd.DataFrame(thetas)
             regrets.to_csv(save_path + '/regret.csv')
-            thetas.to_csv(save_path + '/theta.csv')
+            self.algorithm.save(save_path)

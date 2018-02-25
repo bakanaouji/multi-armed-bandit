@@ -1,6 +1,6 @@
 import argparse
 
-from utils.data_summarize import summarize_log
+from utils.data_summarizing import summarize_data
 
 
 def main():
@@ -19,7 +19,7 @@ def main():
     save_path = '../data/' + args.save_path
 
     # summarize data
-    summarize_log(save_path, args.file_name, args.y_lim)
+    summarize_data(save_path, args.file_name, args.y_lim)
 
 
 if __name__ == '__main__':

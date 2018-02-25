@@ -1,9 +1,10 @@
 import os
-import matplotlib.pyplot as plt
 import pandas as pd
 
+from utils.data_plotting import plot_data
 
-def summarize_log(save_path, file_name, y_lim):
+
+def summarize_data(save_path, file_name, y_lim):
     files = os.listdir(save_path)
     files = [file for file in files if file[-4:] != '.pdf']
 
@@ -16,10 +17,4 @@ def summarize_log(save_path, file_name, y_lim):
         df_concat = pd.concat([df_concat, data], axis=1)
 
     # plot data
-    plt.plot(df_concat)
-    plt.grid()
-    plt.xscale('log')
-    plt.xlim(0, len(df_concat.index))
-    plt.ylim(0, y_lim)
-    plt.savefig(save_path + '/summarize_mean_' + file_name + '.pdf')
-    plt.close()
+    plot_data(save_path, 'summarize_maen_' + file_name, 0.0, y_lim, df_concat)
