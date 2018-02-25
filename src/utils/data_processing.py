@@ -1,9 +1,8 @@
-import matplotlib.pyplot as plt
 import os
 import pandas as pd
 
 
-def calc_mean_log(save_path, file_name, ylim):
+def calc_mean_log(save_path, file_name):
     files = os.listdir(save_path)
     files = [file for file in files if file[:3] == 'Exp']
     N = len(files)
@@ -16,11 +15,3 @@ def calc_mean_log(save_path, file_name, ylim):
     mean.to_csv(save_path + '/mean_' + file_name + '.csv')
 
     print(mean)
-
-    plt.plot(mean)
-    plt.grid()
-    plt.xscale('log')
-    plt.xlim(0, len(mean.index))
-    plt.ylim(0, ylim)
-    plt.savefig(save_path + '/mean_' + file_name + '.pdf')
-    plt.close()

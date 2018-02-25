@@ -16,8 +16,6 @@ def main():
                         help='Whether to save log')
     parser.add_argument('--show_log', action='store_true',
                         help='Whether to show log')
-    parser.add_argument('--plt_ylim', type=int, default=100,
-                        help='Max value of y axis')
     parser.set_defaults(save_log=False)
     parser.set_defaults(show_log=False)
 
@@ -49,7 +47,7 @@ def main():
     # calculate mean values of log
     if args.save_log:
         print('----------Calc Mean of Log----------')
-        calc_mean_log(save_path_root, 'regret', args.plt_ylim)
+        calc_mean_log(save_path_root, 'regret')
 
 
 if __name__ == '__main__':
