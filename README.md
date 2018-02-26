@@ -1,1 +1,1 @@
-# ThompsonSamplingExp
+# MultiArmedBandit
