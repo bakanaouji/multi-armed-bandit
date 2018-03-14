@@ -49,9 +49,9 @@ class ThompsonSamplingGaussianSicqPrior(object):
         self.mu[arm_index] = (mu * k + reward) / (k + 1.0)
         self.k[arm_index] = k + 1.0
 
-    def save(self, save_path):
+    def save(self, folder_name):
         if self.save_log:
             self.thetas = pd.DataFrame(self.thetas)
-            self.thetas.to_csv(save_path + '/theta.csv')
+            self.thetas.to_csv(folder_name + '/theta.csv')
             self.variances = pd.DataFrame(self.variances)
-            self.variances.to_csv(save_path + '/variance.csv')
+            self.variances.to_csv(folder_name + '/variance.csv')

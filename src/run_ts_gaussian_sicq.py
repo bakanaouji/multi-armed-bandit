@@ -7,7 +7,8 @@ from utils.data_processing import calc_mean_data
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Bandit Experiment')
+    parser = argparse.ArgumentParser(
+        description='Bandit Experiment of TS-Gaussian-Sicq-Prior')
 
     # setting of experiment
     parser.add_argument('--exp_num', type=int, default=1,
@@ -32,12 +33,11 @@ def main():
             NormalDistributionArm(0.0, 0.3)]
 
     # define bandit algorithm
-    algorithm = ThompsonSamplingGaussianPrior(len(arms), args.save_log)
-    # algorithm = ThompsonSamplingGaussianSicqPrior(len(arms), args.save_log)
+    algorithm = ThompsonSamplingGaussianSicqPrior(len(arms), args.save_log)
     arm_name = ''
     for i in range(len(arms)):
         arm_name += arms[i].name()
-    save_path_root = '../data/' + arm_name + '/' + algorithm.__class__.__name__
+    root_folder_name = '../data/' + arm_name + '/' + algorithm.__class__.__name__
     core = BanditCore(arms, algorithm, args)
 
     # run experiment
@@ -46,15 +46,15 @@ def main():
         for i in range(args.exp_num):
             print('Run Exp' + str(i))
             # define bandit algorithm
-            save_path = save_path_root + '/Exp' + str(i)
-            core.experiment(save_path)
+            folder_name = root_folder_name + '/Exp' + str(i)
+            core.experiment(folder_name)
             print('Finish Exp' + str(i))
             print('')
 
     # calculate mean values of log
     if args.summarize_log:
         print('----------Calc Mean of Log----------')
-        calc_mean_data(save_path_root)
+        calc_mean_data(root_folder_name)
 
 
 if __name__ == '__main__':

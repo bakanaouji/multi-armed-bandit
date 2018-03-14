@@ -12,7 +12,7 @@ class BanditCore(object):
         self.save_log = args.save_log
         self.show_log = args.show_log
 
-    def experiment(self, save_path):
+    def experiment(self, folder_name):
         self.algorithm.initialize()
 
         N = len(self.arms)
@@ -57,8 +57,8 @@ class BanditCore(object):
 
         # save log
         if self.save_log:
-            if not os.path.exists(save_path):
-                os.makedirs(save_path)
+            if not os.path.exists(folder_name):
+                os.makedirs(folder_name)
             regrets = pd.DataFrame(regrets)
-            regrets.to_csv(save_path + '/regret.csv')
-            self.algorithm.save(save_path)
+            regrets.to_csv(folder_name + '/regret.csv')
+            self.algorithm.save(folder_name)

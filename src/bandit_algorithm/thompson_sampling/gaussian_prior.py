@@ -30,7 +30,7 @@ class ThompsonSamplingGaussianPrior(object):
                               + reward) / (self.k[arm_index] + 2.0)
         self.k[arm_index] += 1.0
 
-    def save(self, save_path):
+    def save(self, folder_name):
         if self.save_log:
             self.thetas = pd.DataFrame(self.thetas)
-            self.thetas.to_csv(save_path + '/theta.csv')
+            self.thetas.to_csv(folder_name + '/theta.csv')
