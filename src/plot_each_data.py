@@ -28,7 +28,8 @@ def main():
     print('----------Plot Data----------')
     files = os.listdir(save_path)
     files = [file for file in files
-             if file[-4:] != '.csv' and files[-4:] != '.pdf']
+             if file[-4:] != '.csv' and files[-4:] != '.pdf'
+             and file[:1] != '.']
     for file in files:
         print('Plot Data : ' + save_path + '/' + file + '/'
               + args.file_name + '.csv')

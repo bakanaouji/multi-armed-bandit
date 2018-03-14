@@ -6,7 +6,7 @@ from utils.data_plotting import plot_data
 
 def summarize_data(save_path, file_name, y_lim):
     files = os.listdir(save_path)
-    files = [file for file in files if file[-4:] != '.pdf']
+    files = [file for file in files if file[-4:] != '.pdf' and file[:1] != '.']
 
     # summarize data
     df = [pd.DataFrame.from_csv(save_path + '/' + file
