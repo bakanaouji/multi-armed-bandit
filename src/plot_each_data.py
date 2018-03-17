@@ -8,7 +8,7 @@ from utils.data_plotting import plot_each_data
 def main():
     parser = argparse.ArgumentParser(description='Plot each data')
 
-    # setting of experiment
+    # setting
     parser.add_argument('--y_min', type=float, default=0.0,
                         help='Min value of y axis')
     parser.add_argument('--y_max', type=float, default=100.0,
