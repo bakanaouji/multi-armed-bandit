@@ -1,4 +1,4 @@
-# MultiArmedBandit
+# multi_armed_bandit
 
 ## Usage
 
