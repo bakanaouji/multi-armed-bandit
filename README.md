@@ -27,11 +27,11 @@ The example output is
 $ python run_ts_gaussian.py
 ----------Run Exp----------
 Run Exp0
-iteration: 0, regret: 0.0, est_mean: 1.0845911305543992, est_mean: -0.5721300451515998,
-iteration: 5000, regret: 151.0, est_mean: 1.0016287755084634, est_mean: 0.12459356280719754,
-iteration: 10000, regret: 151.0, est_mean: 0.9968657345808376, est_mean: 0.07661870902857582,
-iteration: 15000, regret: 151.0, est_mean: 0.9701567651383437, est_mean: 0.0686283293930253,
-iteration: 20000, regret: 151.0, est_mean: 0.9910014642015867, est_mean: 0.051204427340400635,
+iteration: 0, selected arm:1, regret: 1.0,
+iteration: 5000, selected arm:0, regret: 120.0,
+iteration: 10000, selected arm:0, regret: 120.0,
+iteration: 15000, selected arm:0, regret: 120.0,
+iteration: 20000, selected arm:0, regret: 120.0,
 Finish Exp0
 ```
 
