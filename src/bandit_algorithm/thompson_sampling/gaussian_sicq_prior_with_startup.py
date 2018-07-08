@@ -49,6 +49,9 @@ class ThompsonSamplingGaussianSicqPriorWithStartup(object):
     def update_param(self, arm_id, reward):
         if self.t <= self.threshold:
             self.rewards[arm_id].append(reward)
+            self.vs[arm_id] = self.vs[arm_id] + 1.0
+            self.ks[arm_id] = self.ks[arm_id] + 1.0
+
             if self.t == self.threshold:
                 for i in range(self.N):
                     if len(self.rewards[i]) <= 1:
