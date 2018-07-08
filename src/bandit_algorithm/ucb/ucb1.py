@@ -14,6 +14,8 @@ class UCB1(object):
     def initialize(self):
         self.means = np.zeros(self.N)
         self.ks = np.zeros(self.N)
+        self.g = 0
+        self.scores = []
 
     def select_arm(self):
         arm_id = -1

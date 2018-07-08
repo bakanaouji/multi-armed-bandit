@@ -15,6 +15,12 @@ class HyperOpt(object):
         self.regrets = []
         self.t = 0
 
+    def initialize(self):
+        self.trials = Trials()
+        self.regret = 0.0
+        self.regrets = []
+        self.t = 0
+
     def one_iteration(self, params):
         # select arm
         arm_id = params['arm']
@@ -33,6 +39,7 @@ class HyperOpt(object):
         return -reward
 
     def experiment(self, folder_name):
+        self.initialize()
         fmin(self.one_iteration, self.hyper_params,
              algo=tpe.suggest, max_evals=20000,
              trials=self.trials)
