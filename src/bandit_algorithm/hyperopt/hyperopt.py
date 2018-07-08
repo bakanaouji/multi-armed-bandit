@@ -35,7 +35,7 @@ class HyperOpt(object):
         self.regrets.append(self.regret)
         # output
         if self.t % 1000 == 0:
-            s = 'iteration: ' + str(self.t) + ', selected arm:' + str(arm_id) \
+            s = 'iteration: ' + str(self.t) + ', selected arm: ' + str(arm_id) \
                 + ', regret: ' + str(self.regret)
             print(s)
         self.t += 1
