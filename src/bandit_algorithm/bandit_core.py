@@ -15,8 +15,6 @@ class BanditCore(object):
     def experiment(self, folder_name):
         self.algorithm.initialize()
 
-        N = len(self.arms)
-
         regret = 0.0
         regrets = []
 
@@ -24,23 +22,20 @@ class BanditCore(object):
         loop_num = 20000
         t = 0
         while True:
-            # estimate mean of each arm
-            theta = self.algorithm.estimate_mean()
             # select arm
-            arm_index = np.argmax(theta)
+            arm_id = self.algorithm.select_arm()
             # play arm and observe reward
-            reward = self.arms[arm_index].play()
+            reward = self.arms[arm_id].play()
             # update parameter of bandit algorithm
-            self.algorithm.update_param(arm_index, reward)
+            self.algorithm.update_param(arm_id, reward)
             # update regret
-            regret += self.arms[0].mean - self.arms[arm_index].mean
+            regret += self.arms[0].mean - self.arms[arm_id].mean
             # stock log
             regrets.append(regret)
             # output
             if t % 5000 == 0:
-                s = 'iteration: ' + str(t) + ', regret: ' + str(regret) + ', '
-                for i in range(N):
-                    s += 'est_mean: ' + str(theta[i]) + ', '
+                s = 'iteration: ' + str(t) + ', selected arm:' + str(arm_id) \
+                    + ', regret: ' + str(regret)
                 print(s)
             t += 1
             if t > loop_num:

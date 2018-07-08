@@ -5,20 +5,23 @@ import pandas as pd
 class ThompsonSamplingGaussianPrior(object):
     def __init__(self, N, save_log=False):
         self.N = N
-        self.k = np.zeros(N)
-        self.mu = np.zeros(N)
+        self.ks = np.zeros(N)
+        self.mus = np.zeros(N)
         self.save_log = save_log
         self.thetas = []
 
     def initialize(self):
-        self.k = np.zeros(self.N)
-        self.mu = np.zeros(self.N)
+        self.ks = np.zeros(self.N)
+        self.mus = np.zeros(self.N)
         self.thetas = []
+
+    def select_arm(self):
+        return np.argmax(self.estimate_mean())
 
     def estimate_mean(self):
         # For each arm i=1,...,N, sample random value from normal distribution
-        theta = [np.random.normal(self.mu[i],
-                                  np.math.sqrt(1.0 / (self.k[i] + 1.0)))
+        theta = [np.random.normal(self.mus[i],
+                                  np.math.sqrt(1.0 / (self.ks[i] + 1.0)))
                  for i in range(self.N)]
         if self.save_log:
             self.thetas.append(theta)
@@ -26,9 +29,9 @@ class ThompsonSamplingGaussianPrior(object):
 
     def update_param(self, arm_index, reward):
         # update parameter of normal distribution
-        self.mu[arm_index] = (self.mu[arm_index] * (self.k[arm_index] + 1.0)
-                              + reward) / (self.k[arm_index] + 2.0)
-        self.k[arm_index] += 1.0
+        self.mus[arm_index] = (self.mus[arm_index] * (self.ks[arm_index] + 1.0)
+                               + reward) / (self.ks[arm_index] + 2.0)
+        self.ks[arm_index] += 1.0
 
     def save(self, folder_name):
         if self.save_log:
