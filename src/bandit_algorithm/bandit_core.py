@@ -32,7 +32,7 @@ class BanditCore(object):
             regrets.append(regret)
             # output
             if t % 5000 == 0:
-                s = 'iteration: ' + str(t) + ', selected arm:' + str(arm_id) \
+                s = 'iteration: ' + str(t) + ', selected arm: ' + str(arm_id) \
                     + ', regret: ' + str(regret)
                 print(s)
             t += 1
