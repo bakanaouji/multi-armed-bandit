@@ -2,8 +2,6 @@ import matplotlib.pyplot as plt
 import os
 import pandas as pd
 
-from utils.random import *
-
 
 class BanditCore(object):
     def __init__(self, arms, algorithm, args):
