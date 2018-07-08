@@ -13,6 +13,8 @@ def main():
     # setting of experiment
     parser.add_argument('--exp_num', type=int, default=1,
                         help='Number of experiments')
+    parser.add_argument('--play_num', type=int, default=20000,
+                        help='Number Playing arms in each experiment.')
     parser.add_argument('--not_run_exp', action='store_true',
                         help='Whether to run experiment')
     parser.add_argument('--save_log', action='store_true',

@@ -7,6 +7,7 @@ class BanditCore(object):
     def __init__(self, arms, algorithm, args):
         self.arms = arms
         self.algorithm = algorithm
+        self.play_num = args.play_num
         self.save_log = args.save_log
         self.show_log = args.show_log
 
@@ -17,7 +18,6 @@ class BanditCore(object):
         regrets = []
 
         # main loop
-        loop_num = 20000
         t = 0
         while True:
             # select arm
@@ -36,7 +36,7 @@ class BanditCore(object):
                     + ', regret: ' + str(regret)
                 print(s)
             t += 1
-            if t > loop_num:
+            if t > self.play_num:
                 break
 
         # plot log
@@ -44,7 +44,7 @@ class BanditCore(object):
             plt.plot(regrets)
             plt.grid()
             plt.xscale('log')
-            plt.xlim(0, loop_num)
+            plt.xlim(0, self.play_num)
             plt.ylim(0, 100)
             plt.show()
 

@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import os
 import pandas as pd
 
@@ -5,11 +6,13 @@ from hyperopt import fmin, tpe, Trials
 
 
 class HyperOpt(object):
-    def __init__(self, arms, hyper_params, save_log=False):
+    def __init__(self, arms, hyper_params, play_num, save_log=False, show_log=False):
         self.arms = arms
         self.N = len(arms)
+        self.play_num = play_num
         self.hyper_params = hyper_params
         self.save_log = save_log
+        self.show_log = show_log
         self.trials = Trials()
         self.regret = 0.0
         self.regrets = []
@@ -41,8 +44,16 @@ class HyperOpt(object):
     def experiment(self, folder_name):
         self.initialize()
         fmin(self.one_iteration, self.hyper_params,
-             algo=tpe.suggest, max_evals=20000,
+             algo=tpe.suggest, max_evals=self.play_num,
              trials=self.trials)
+        # plot log
+        if self.show_log:
+            plt.plot(self.regrets)
+            plt.grid()
+            plt.xscale('log')
+            plt.xlim(0, self.play_num)
+            plt.ylim(0, 100)
+            plt.show()
         # save log
         if self.save_log:
             if not os.path.exists(folder_name):
