@@ -23,7 +23,7 @@ class UCB1(object):
             if self.ks[i] == 0:
                 arm_id = i
         if arm_id < 0:
-            score = self.means + np.sqrt(np.log(self.g) / (2.0 * self.ks))
+            score = self.means + np.sqrt(2.0 * np.log(self.g) / self.ks)
             arm_id = np.argmax(score)
         else:
             score = np.zeros(self.N)
