@@ -27,11 +27,11 @@ The example output is
 $ python run_ts_gaussian.py
 ----------Run Exp----------
 Run Exp0
-iteration: 0, selected arm:1, regret: 1.0
-iteration: 5000, selected arm:0, regret: 120.0
-iteration: 10000, selected arm:0, regret: 120.0
-iteration: 15000, selected arm:0, regret: 120.0
-iteration: 20000, selected arm:0, regret: 120.0
+iteration: 0, selected arm:　1, regret: 1.0
+iteration: 5000, selected arm:　0, regret: 120.0
+iteration: 10000, selected arm:　0, regret: 120.0
+iteration: 15000, selected arm:　0, regret: 120.0
+iteration: 20000, selected arm:　0, regret: 120.0
 Finish Exp0
 ```
 
