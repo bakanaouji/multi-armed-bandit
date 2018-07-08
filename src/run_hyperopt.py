@@ -38,7 +38,7 @@ def main():
     }
 
     # define bandit algorithm
-    algorithm = HyperOpt(arms, hyper_params)
+    algorithm = HyperOpt(arms, hyper_params, args.save_log)
     arm_name = ''
     for i in range(len(arms)):
         arm_name += arms[i].name()
@@ -51,7 +51,7 @@ def main():
             print('Run Exp' + str(i))
             # define bandit algorithm
             folder_name = root_folder_name + '/Exp' + str(i)
-            algorithm.optimize()
+            algorithm.experiment(folder_name)
             print('Finish Exp' + str(i))
             print('')
 
