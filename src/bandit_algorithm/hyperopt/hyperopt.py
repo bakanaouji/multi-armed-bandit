@@ -25,7 +25,7 @@ class HyperOpt(object):
         # stock log
         self.regrets.append(self.regret)
         # output
-        if self.t % 5000 == 0:
+        if self.t % 1000 == 0:
             s = 'iteration: ' + str(self.t) + ', selected arm:' + str(arm_id) \
                 + ', regret: ' + str(self.regret)
             print(s)
@@ -42,3 +42,19 @@ class HyperOpt(object):
                 os.makedirs(folder_name)
             regrets = pd.DataFrame(self.regrets)
             regrets.to_csv(folder_name + '/regret.csv')
+            scores = self.trials.losses()
+            log = {'fval': []}
+            ts = self.trials.trials
+            keys = ts[0]['misc']['vals'].keys()
+            for key in keys:
+                log[key] = []
+            for i in range(len(ts)):
+                log['fval'].append(scores[i])
+                for key in keys:
+                    if len(ts[i]['misc']['vals'][key]) > 0:
+                        log[key].append(ts[i]['misc']['vals'][key][0])
+                    else:
+                        log[key].append(None)
+            df = pd.DataFrame(log)
+            df.index.name = '#index'
+            df.to_csv(folder_name + '/log.csv', sep=',')
