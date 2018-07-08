@@ -2,14 +2,13 @@ import argparse
 
 from arm.arm import NormalDistributionArm
 from bandit_algorithm.bandit_core import BanditCore
-from bandit_algorithm.thompson_sampling.gaussian_prior import \
-    ThompsonSamplingGaussianPrior
+from bandit_algorithm.ucb.ucb1 import UCB1
 from utils.data_processing import calc_mean_data
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Bandit Experiment of TS-Gaussian-Prior')
+        description='Bandit Experiment of UCB1')
 
     # setting of experiment
     parser.add_argument('--exp_num', type=int, default=1,
@@ -34,7 +33,7 @@ def main():
             NormalDistributionArm(0.0, 0.3)]
 
     # define bandit algorithm
-    algorithm = ThompsonSamplingGaussianPrior(len(arms), args.save_log)
+    algorithm = UCB1(len(arms), args.save_log)
     arm_name = ''
     for i in range(len(arms)):
         arm_name += arms[i].name()

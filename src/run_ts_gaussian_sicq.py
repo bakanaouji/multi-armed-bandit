@@ -2,7 +2,8 @@ import argparse
 
 from arm.arm import NormalDistributionArm
 from bandit_algorithm.bandit_core import BanditCore
-from bandit_algorithm.thompson_sampling import *
+from bandit_algorithm.thompson_sampling.gaussian_sicq_prior import \
+    ThompsonSamplingGaussianSicqPrior
 from utils.data_processing import calc_mean_data
 
 
