@@ -27,11 +27,11 @@ class ThompsonSamplingGaussianPrior(object):
             self.thetas.append(theta)
         return theta
 
-    def update_param(self, arm_index, reward):
+    def update_param(self, arm_id, reward):
         # update parameter of normal distribution
-        self.mus[arm_index] = (self.mus[arm_index] * (self.ks[arm_index] + 1.0)
-                               + reward) / (self.ks[arm_index] + 2.0)
-        self.ks[arm_index] += 1.0
+        self.mus[arm_id] = (self.mus[arm_id] * (self.ks[arm_id] + 1.0)
+                            + reward) / (self.ks[arm_id] + 2.0)
+        self.ks[arm_id] += 1.0
 
     def save(self, folder_name):
         if self.save_log:
