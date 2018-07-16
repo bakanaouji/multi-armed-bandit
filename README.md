@@ -21,6 +21,18 @@ $ python run_ts_gaussian.py
 $ python run_ts_gaussian_sicq.py
 ```
 
+#### run UCB1
+
+```
+$ python run_ucb1.py
+```
+
+#### run Hyperopt
+
+```
+$ python run_hyperopt.py
+```
+
 The example output is
 
 ```
