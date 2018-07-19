@@ -75,7 +75,7 @@ There are several options to change setting of plotting.
 * folder_name: Name of folder where outputs of experiment are saved (Name of folder: `<Arm Name>/<Algorithm Name>`). Defaults to "N(1.0,9.0)N(0.0,0.09)/ThompsonSamplingGaussianPrior".
 * file_name: Name of csv file to plot. Defaults to "regret".
 
-#### plot summarized data of output of all experiments of all bandit algorithm in the specified folder.
+#### plot summarized data of output of all experiments in the specified folder.
 
 ```
 $ python plot_summarized_data.py
