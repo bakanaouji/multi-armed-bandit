@@ -55,7 +55,7 @@ There are several options to change setting of experiment.
 * show_log: Whether to graph output using matplotlib.pyplot. Defaults to False.
 * summarize_log: Whether to calculate mean values of output and save it to csv file.
 
-Options can be used lile follows
+Options can be used like follows
 
 ```
 $ python run_ts_gaussian.py --exp_num=100 --save_log
